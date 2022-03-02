@@ -1,0 +1,6 @@
+
+*.pth
+.DS_Store
+*.pyc
+*.jpeg
+*.png
