@@ -25,7 +25,7 @@ def test(initial_dataset_path: str,
     loss_folder_path: str,
     feature_type_acc: str,
     feature_type_loss: str):
-
+    
     print(accuracy_folder_path)
     print(loss_folder_path)
     #image preprocessing
@@ -36,7 +36,7 @@ def test(initial_dataset_path: str,
         num_classes=num_classes, 
         framework="torch"
     )
-     
+    
     #k-fold / cross validation
     X_train, X_test, Y_train, Y_test = kFold.KFold_cross_validation_splitv2(
         features=x, 
@@ -93,7 +93,7 @@ def test(initial_dataset_path: str,
         feature_type_acc = feature_type_acc,
         feature_type_loss = feature_type_loss
     )
-   
+    
     #confusion matrix
     confusionMatrix.compute_confusion_matrix(
         y_true=Y_test, 
@@ -123,3 +123,4 @@ def test(initial_dataset_path: str,
                                         composed_dataset_path,
                                         extracted_features_path,
                                         k)
+    

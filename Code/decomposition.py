@@ -8,6 +8,15 @@ import matplotlib.pyplot as plt
 def test():
     print("decomposition based on class names")
     
+def imsave(filename: str, data: np.ndarray):
+    ext = os.path.splitext(filename)[1]
+    if ext in [".tif", ".tiff"]:
+        import tifffile
+        tifffile.imsave(filename, data)
+    else:
+        import imageio
+        imageio.imsave(filename, data) 
+        
 def decompose(
     path_to_features: str, 
     path_to_images: str, 
@@ -39,10 +48,12 @@ def decompose(
         
         # If image belongs to a cluster, write the image to a certain folder, otherwise, write it to the other folder.
         if (idx[i] == 1):
-            plt.imsave(filename_1, I)
+            imsave(filename_1, I)
+            #plt.imsave(filename_1, I)
         else:
-            plt.imsave(filename_2, I)
-    
+            #plt.imsave(filename_2, I)
+            imsave(filename_2, I)
+        
 def execute_decomposition(
     initial_dataset_path: str, 
     composed_dataset_path: str, 
