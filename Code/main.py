@@ -44,8 +44,7 @@ k = 2
 modelType = resnet18
 momentumValue = 0.9
 dropoutValue = 0.5
-lrDecrese = 0.85
-#drop lr by 0.85 ever 5 epochs
+lrDecrese = 0.85 #drop lr by 0.85 ever 5 epochs
 
 #==========================================================
 # Data path:
