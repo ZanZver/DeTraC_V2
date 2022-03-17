@@ -4,6 +4,7 @@ import modelPrediction
 import torchvision.models as models
 import os
 import createNewInitaialDataset
+from datetime import datetime
 
 print("==========================================================")
 print("Starting code")
@@ -61,8 +62,24 @@ TORCH_CKPT_DIR = os.path.join(GENERAL_MODELS_PATH, "torch")
 
 # Graphs path:
 GRAPHS_FOLDER_PATH = "Graphs"
+'''
 ACCURACY_FOLDER_PATH = os.path.join(GRAPHS_FOLDER_PATH, "AccuracyGraphs")
 LOSS_FOLDER_PATH = os.path.join(GRAPHS_FOLDER_PATH, "LossGraphs")
+
+FEATURE_EXTRACTOR_ACCURACY_FOLDER_PATH = os.path.join(ACCURACY_FOLDER_PATH, "FeatureExtractor")
+FEATURE_COMPOSER_COMPOSEDPATH_ACCURACY_FOLDER_PATH = os.path.join(ACCURACY_FOLDER_PATH, "FeatureComposerComposedPath")
+FEATURE_COMPOSER_INITIALPATH_ACCURACY_FOLDER_PATH = os.path.join(ACCURACY_FOLDER_PATH, "FeatureComposerInitialPath")
+
+FEATURE_EXTRACTOR_LOSS_FOLDER_PATH = os.path.join(LOSS_FOLDER_PATH, "FeatureExtractor")
+FEATURE_COMPOSER_COMPOSEDPATH_LOSS_FOLDER_PATH = os.path.join(LOSS_FOLDER_PATH, "FeatureComposerComposedPath")
+FEATURE_COMPOSER_INITIALPATH_LOSS_FOLDER_PATH = os.path.join(LOSS_FOLDER_PATH, "FeatureComposerInitialPath")
+'''
+timeNow = str(datetime.now()).replace(" ","_")
+
+MODEL_GRAPH_DATE_FOLDER = os.path.join(GRAPHS_FOLDER_PATH, str("Model_Run_"+timeNow))
+
+ACCURACY_FOLDER_PATH = os.path.join(MODEL_GRAPH_DATE_FOLDER, "AccuracyGraphs")
+LOSS_FOLDER_PATH = os.path.join(MODEL_GRAPH_DATE_FOLDER, "LossGraphs")
 
 FEATURE_EXTRACTOR_ACCURACY_FOLDER_PATH = os.path.join(ACCURACY_FOLDER_PATH, "FeatureExtractor")
 FEATURE_COMPOSER_COMPOSEDPATH_ACCURACY_FOLDER_PATH = os.path.join(ACCURACY_FOLDER_PATH, "FeatureComposerComposedPath")
@@ -100,6 +117,7 @@ checkFolders(TF_MODEL_DIR)
 checkFolders(TORCH_CKPT_DIR)
 
 checkFolders(GRAPHS_FOLDER_PATH)
+checkFolders(MODEL_GRAPH_DATE_FOLDER)
 checkFolders(ACCURACY_FOLDER_PATH)
 checkFolders(LOSS_FOLDER_PATH)
 
@@ -150,7 +168,7 @@ createNewInitaialDataset.execute_newInitaial_dataset(INITIAL_DATASET_PATH,INITIA
     To do: if Exception has been thrown, stop the code
 '''
 
-featureComposerOld = False
+featureComposerOld = True
 
 if(featureComposerOld == True):
     print("==========================================================")
