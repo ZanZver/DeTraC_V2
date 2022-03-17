@@ -45,10 +45,12 @@ def compute_confusion_matrix(
     # If the feature composer was selected, divide the confusion matrix by NxN kernels
     if mode == "feature_composer":
         cmat = compose_classes(cmat, (2, 2))
-        
+    
     print(cmat)
-
+       
     # Compute accuracy, sensitivity and specificity
+    #multiclassConfusionMatrix.multiclass_confusion_matrix(cmat, num_classes)
     acc, sn, sp = multiclassConfusionMatrix.multiclass_confusion_matrix(cmat, num_classes)
+    
     output = f"ACCURACY = {acc}"
     print(output)

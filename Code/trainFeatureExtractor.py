@@ -16,6 +16,9 @@ def test(initial_dataset_path: str,
     num_classes: int,
     folds: int,
     lr:float,
+    momentumValue:float,
+    dropoutValue:float,
+    lrDecrese:float,
     cuda: bool,
     ckpt_dir: str,
     composed_dataset_path: str,
@@ -77,9 +80,12 @@ def test(initial_dataset_path: str,
         cuda=cuda,
         mode="feature_extractor",
         ckpt_dir=ckpt_dir,
-        labels=class_names
+        labels=class_names,
+        momentumValue=momentumValue,
+        dropoutValue=dropoutValue,
+        lrDecrese=lrDecrese
     )
-    
+  
     net.fitv2(
         X_train,
         Y_train,
@@ -93,7 +99,7 @@ def test(initial_dataset_path: str,
         feature_type_acc = feature_type_acc,
         feature_type_loss = feature_type_loss
     )
-    
+  
     #confusion matrix
     confusionMatrix.compute_confusion_matrix(
         y_true=Y_test, 
@@ -117,10 +123,9 @@ def test(initial_dataset_path: str,
             file=os.path.join(extracted_features_path, f"{class_name}.npy"), 
             arr=extracted_features
         )
-    
+
     #decomposition based on class names
     decomposition.execute_decomposition(initial_dataset_path,
                                         composed_dataset_path,
                                         extracted_features_path,
                                         k)
-    

@@ -30,6 +30,7 @@ def decompose(
 
     # Cluster index
     idx = KMeans(n_clusters=k, random_state=0).fit(features)
+    
     idx = idx.predict(features)
 
     # Images list
@@ -92,7 +93,7 @@ def execute_decomposition(
             print(f"Directory {class_name}_2 already exists. Overwriting.")
             shutil.rmtree(os.path.join(composed_dataset_path, f"{class_name}_2/"))
             os.mkdir(os.path.join(composed_dataset_path, f"{class_name}_2/"))
-
+    
         # Decompose said class' data
         decompose(
             path_to_features=os.path.join(features_path, f"{class_name}.npy"),

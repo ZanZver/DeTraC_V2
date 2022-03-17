@@ -32,16 +32,20 @@ vgg19 = "vgg19"
 # 1) 0.49 2) 0.50 (20 in Folder 1, 20 in folder 2)
 
 # Variables:
-num_epochs = 20
-batch_size = 16
-feature_extractor_num_classes = 2
+num_epochs = 8
+batch_size = 32
+feature_extractor_num_classes = 8
 feature_composer_num_classes = 2 * feature_extractor_num_classes
 folds = 2
-feature_extractor_lr = 0.001
-feature_composer_lr = 0.001
+feature_extractor_lr = 0.01
+feature_composer_lr = 0.01
 use_cuda = False
 k = 2
 modelType = resnet18
+momentumValue = 0.9
+dropoutValue = 0.5
+lrDecrese = 0.85
+#drop lr by 0.85 ever 5 epochs
 
 #==========================================================
 # Data path:
@@ -125,6 +129,9 @@ trainFeatureExtractor.test( initial_dataset_path=INITIAL_DATASET_PATH,
                             num_classes=feature_extractor_num_classes,
                             folds=folds,
                             lr=feature_extractor_lr,
+                            momentumValue=momentumValue,
+                            dropoutValue=dropoutValue,
+                            lrDecrese=lrDecrese,
                             cuda=use_cuda,
                             ckpt_dir=TORCH_CKPT_DIR,
                             composed_dataset_path = COMPOSED_DATASET_PATH,
@@ -156,6 +163,9 @@ if(featureComposerOld == True):
                                 num_classes=feature_composer_num_classes,
                                 folds=folds,
                                 lr=feature_composer_lr,
+                                momentumValue=momentumValue,
+                                dropoutValue=dropoutValue,
+                                lrDecrese=lrDecrese,
                                 cuda=use_cuda,
                                 ckpt_dir=TORCH_CKPT_DIR,
                                 modelType = modelType,
@@ -173,6 +183,9 @@ else:
                                 num_classes=feature_composer_num_classes,
                                 folds=folds,
                                 lr=feature_composer_lr,
+                                momentumValue=momentumValue,
+                                dropoutValue=dropoutValue,
+                                lrDecrese=lrDecrese,
                                 cuda=use_cuda,
                                 ckpt_dir=TORCH_CKPT_DIR,
                                 modelType = modelType,
@@ -180,7 +193,6 @@ else:
                                 loss_folder_path = LOSS_FOLDER_PATH,
                                 feature_type_acc = FEATURE_COMPOSER_INITIALPATH_ACCURACY_FOLDER_PATH,
                                 feature_type_loss = FEATURE_COMPOSER_INITIALPATH_LOSS_FOLDER_PATH)
-
 
 #==========================================================
 #Task 3 - predict

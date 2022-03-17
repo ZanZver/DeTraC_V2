@@ -12,6 +12,9 @@ def test(
     num_classes: int,
     folds: int,
     lr:float,
+    momentumValue:float,
+    dropoutValue:float,
+    lrDecrese:float,
     cuda: bool,
     ckpt_dir: str,
     modelType: str,
@@ -70,7 +73,10 @@ def test(
         cuda=cuda,
         mode="feature_composer",
         ckpt_dir=ckpt_dir,
-        labels=class_names
+        labels=class_names,
+        momentumValue=momentumValue,
+        dropoutValue=dropoutValue,
+        lrDecrese=lrDecrese
     )
      
     net.fitv2(
@@ -88,7 +94,6 @@ def test(
     )
     
     #confusion matrix
-    ''' 
     confusionMatrix.compute_confusion_matrix(
         y_true=Y_test, 
         y_pred=net.infer(X_test), 
@@ -96,4 +101,3 @@ def test(
         mode="feature_composer", 
         num_classes = num_classes // 2
     )
-    '''

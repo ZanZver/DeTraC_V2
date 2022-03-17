@@ -61,7 +61,10 @@ class Net(object):
         ckpt_dir: str,
         cuda: bool = False,
         labels: list = [],
-        lr: float = 0.0):
+        lr: float = 0.0,
+        momentumValue: float = 0.9,
+        dropoutValue: float=0.2,
+        lrDecrese: float=0.0):
         
         self.mode = mode
         self.model = pretrained_model
@@ -70,6 +73,9 @@ class Net(object):
         self.cuda = cuda
         self.ckpt_dir = ckpt_dir
         self.labels = labels
+        self.momentumValue = momentumValue
+        self.dropoutValue = dropoutValue
+        self.lrDecrese = lrDecrese
         
         self.epoch_list = []
         self.train_loss_list = []
@@ -98,6 +104,7 @@ class Net(object):
             out_features=self.num_classes
         )
         self.softmax_activation = nn.Softmax(dim=1)
+        self.model_dropout = nn.Dropout(p=self.dropoutValue)
 
         # Set the weights and biases accordingly
         with torch.no_grad():
@@ -209,7 +216,7 @@ class Net(object):
             self.optimizer = optim.SGD(
                 params=self.model.parameters(),
                 lr=self.lr,
-                momentum=0.9,
+                momentum=self.momentumValue,
                 nesterov=False,
                 weight_decay=1e-3
             )
@@ -229,7 +236,7 @@ class Net(object):
             self.optimizer = optim.SGD(
                 params=self.model.parameters(),
                 lr=self.lr,
-                momentum=0.95,
+                momentum=self.momentumValue,
                 nesterov=False,
                 weight_decay=1e-4
             )
@@ -544,6 +551,7 @@ class Net(object):
                 progress_bar.set_description(
                     f"[Epoch {epoch + 1} stats]: train_loss = {train_loss} | train_acc = {train_acc}% | val_loss = {val_loss} | val_acc = {val_acc}%")
         
+        
         else:
             progress_bar = tqdm(range(start_epoch, epochs))
             progress_bar.set_description("Starting training...")
@@ -572,7 +580,10 @@ class Net(object):
                 self.val_acc_list.append(val_acc)
                 progress_bar.set_description(
                     f"[Epoch {epoch + 1} stats]: train_loss = {train_loss:.2f} | train_acc = {train_acc:.2f}% | val_loss = {val_loss:.2f} | val_acc = {val_acc:.2f}%")
-
+                #every 5 epochs drop LR by self.lrDecrese
+                if((epoch % 5) == 0):
+                    self.lr = self.lr - self.lrDecrese
+                
             timeNow = str(datetime.now())
             plt.figure()
             plt.plot(self.epoch_list, self.train_acc_list, 'bo', label='Training acc')
