@@ -33,7 +33,7 @@ vgg19 = "vgg19"
 # 1) 0.49 2) 0.50 (20 in Folder 1, 20 in folder 2)
 
 # Variables:
-num_epochs = 8
+num_epochs = 2
 batch_size = 32
 feature_extractor_num_classes = 8
 feature_composer_num_classes = 2 * feature_extractor_num_classes
@@ -139,6 +139,8 @@ checkFolders(FEATURE_COMPOSER_INITIALPATH_LOSS_FOLDER_PATH)
 print("==========================================================")
 print("Train - feature extractor")
 print("==========================================================")
+
+
 trainFeatureExtractor.test( initial_dataset_path=INITIAL_DATASET_PATH,
                             extracted_features_path=EXTRACTED_FEATURES_PATH,
                             epochs=num_epochs,

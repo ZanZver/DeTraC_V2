@@ -123,9 +123,10 @@ def test(initial_dataset_path: str,
             file=os.path.join(extracted_features_path, f"{class_name}.npy"), 
             arr=extracted_features
         )
-
+    
     #decomposition based on class names
     decomposition.execute_decomposition(initial_dataset_path,
                                         composed_dataset_path,
                                         extracted_features_path,
                                         k)
+    
