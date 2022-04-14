@@ -21,7 +21,8 @@ def test(
     accuracy_folder_path: str,
     loss_folder_path: str,
     feature_type_acc: str,
-    feature_type_loss: str):
+    feature_type_loss: str,
+    results_file_path: str):
     
     #image preprocessing
     class_names, x, y = imagePreprocessing.preprocess_imagesv2(
@@ -99,5 +100,6 @@ def test(
         y_pred=net.infer(X_test), 
         framework="torch", 
         mode="feature_composer", 
-        num_classes = num_classes // 2
+        num_classes = num_classes // 2,
+        results_file_path = results_file_path
     )

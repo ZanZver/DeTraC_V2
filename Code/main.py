@@ -1,3 +1,4 @@
+from inspect import Parameter
 import trainFeatureExtractor
 import trainFeatureComposer
 import modelPrediction
@@ -33,19 +34,33 @@ vgg19 = "vgg19"
 # 1) 0.49 2) 0.50 (20 in Folder 1, 20 in folder 2)
 
 # Variables:
-num_epochs = 2
-batch_size = 32
-feature_extractor_num_classes = 8
+num_epochs = 40
+batch_size = 50
+feature_extractor_num_classes = 3
 feature_composer_num_classes = 2 * feature_extractor_num_classes
-folds = 2
-feature_extractor_lr = 0.01
-feature_composer_lr = 0.01
-use_cuda = False
-k = 2
+folds = 3
+feature_extractor_lr = 0.00001
+feature_composer_lr = 0.00001
+use_cuda = True
+k = 3
 modelType = resnet18
-momentumValue = 0.9
-dropoutValue = 0.5
-lrDecrese = 0.85 #drop lr by 0.85 ever 5 epochs
+momentumValue = 0.99
+dropoutValue = 0.75
+lrDecrese = 0.85
+
+parameters = str("""num_epochs = """+str(num_epochs)+"""
+batch_size = """+str(batch_size)+"""
+feature_extractor_num_classes = """+str(feature_extractor_num_classes)+"""
+feature_composer_num_classes = """+str(feature_composer_num_classes)+"""
+folds = """+str(folds)+"""
+feature_extractor_lr = """+str(feature_extractor_lr)+"""
+feature_composer_lr = """+str(feature_composer_lr)+"""
+use_cuda = """+str(use_cuda)+"""
+k = """+str(k)+"""
+modelType = """+str(modelType)+"""
+momentumValue = """+str(momentumValue)+"""
+dropoutValue = """+str(dropoutValue))
+print(parameters)
 
 #==========================================================
 # Data path:
@@ -80,6 +95,8 @@ MODEL_GRAPH_DATE_FOLDER = os.path.join(GRAPHS_FOLDER_PATH, str("Model_Run_"+time
 
 ACCURACY_FOLDER_PATH = os.path.join(MODEL_GRAPH_DATE_FOLDER, "AccuracyGraphs")
 LOSS_FOLDER_PATH = os.path.join(MODEL_GRAPH_DATE_FOLDER, "LossGraphs")
+PARAMETERS_FILE_PATH = os.path.join(MODEL_GRAPH_DATE_FOLDER, "Parameters.txt")
+RESULTS_FILE_PATH = os.path.join(MODEL_GRAPH_DATE_FOLDER, "Results.txt")
 
 FEATURE_EXTRACTOR_ACCURACY_FOLDER_PATH = os.path.join(ACCURACY_FOLDER_PATH, "FeatureExtractor")
 FEATURE_COMPOSER_COMPOSEDPATH_ACCURACY_FOLDER_PATH = os.path.join(ACCURACY_FOLDER_PATH, "FeatureComposerComposedPath")
@@ -129,6 +146,10 @@ checkFolders(FEATURE_EXTRACTOR_LOSS_FOLDER_PATH)
 checkFolders(FEATURE_COMPOSER_COMPOSEDPATH_LOSS_FOLDER_PATH)
 checkFolders(FEATURE_COMPOSER_INITIALPATH_LOSS_FOLDER_PATH)
 
+f = open(PARAMETERS_FILE_PATH, "w")
+f.write(parameters)
+f.close
+
 #==========================================================
 #Task 1 
 #train - feature extractor
@@ -159,7 +180,8 @@ trainFeatureExtractor.test( initial_dataset_path=INITIAL_DATASET_PATH,
                             accuracy_folder_path = ACCURACY_FOLDER_PATH,
                             loss_folder_path = LOSS_FOLDER_PATH,
                             feature_type_acc = FEATURE_EXTRACTOR_ACCURACY_FOLDER_PATH,
-                            feature_type_loss = FEATURE_EXTRACTOR_LOSS_FOLDER_PATH)
+                            feature_type_loss = FEATURE_EXTRACTOR_LOSS_FOLDER_PATH,
+                            results_file_path = RESULTS_FILE_PATH)
 
 createNewInitaialDataset.execute_newInitaial_dataset(INITIAL_DATASET_PATH,INITIAL_DATASET_PATH_V2)
 
@@ -170,7 +192,7 @@ createNewInitaialDataset.execute_newInitaial_dataset(INITIAL_DATASET_PATH,INITIA
     To do: if Exception has been thrown, stop the code
 '''
 
-featureComposerOld = True
+featureComposerOld = False
 
 if(featureComposerOld == True):
     print("==========================================================")
@@ -191,7 +213,8 @@ if(featureComposerOld == True):
                                 accuracy_folder_path = ACCURACY_FOLDER_PATH,
                                 loss_folder_path = LOSS_FOLDER_PATH,
                                 feature_type_acc = FEATURE_COMPOSER_COMPOSEDPATH_ACCURACY_FOLDER_PATH,
-                                feature_type_loss = FEATURE_COMPOSER_COMPOSEDPATH_LOSS_FOLDER_PATH)
+                                feature_type_loss = FEATURE_COMPOSER_COMPOSEDPATH_LOSS_FOLDER_PATH,
+                                results_file_path = RESULTS_FILE_PATH)
 else:
     print("==========================================================")
     print("Train - feature composer - initial dataset")
@@ -211,7 +234,8 @@ else:
                                 accuracy_folder_path = ACCURACY_FOLDER_PATH,
                                 loss_folder_path = LOSS_FOLDER_PATH,
                                 feature_type_acc = FEATURE_COMPOSER_INITIALPATH_ACCURACY_FOLDER_PATH,
-                                feature_type_loss = FEATURE_COMPOSER_INITIALPATH_LOSS_FOLDER_PATH)
+                                feature_type_loss = FEATURE_COMPOSER_INITIALPATH_LOSS_FOLDER_PATH,
+                                results_file_path = RESULTS_FILE_PATH)
 
 #==========================================================
 #Task 3 - predict

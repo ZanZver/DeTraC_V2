@@ -74,8 +74,7 @@ def preprocess_imagesv2(
 
                     # Add the appropriate row from the identity matrix to the labels list
                     # E.g.: If the classes are: COVID, NORMAL and PNEUMONIA,
-                    # the labels will be [1, 0, 0], [0, 1, 0] and [0, 0, 1].
-                    #labels.append(identity_matrix[class_names.index(folder)])
+                    # the labels will be [1, 0, 0], [0, 1, 0] and [0, 0, 1]
                     labels.append(identity_matrix[class_names.index(folder)])
                         
                     file_progress_bar.set_description(f"Loading images from directory {folder}")

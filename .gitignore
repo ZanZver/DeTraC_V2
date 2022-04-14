@@ -9,3 +9,6 @@
 *.npy
 *.npy
 Data/extracted_features/PNEUMONIA.npy
+*.txt
+*.npy
+Data/extracted_features/PNEUMONIA.npy

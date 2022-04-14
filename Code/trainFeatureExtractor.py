@@ -27,10 +27,9 @@ def test(initial_dataset_path: str,
     accuracy_folder_path: str,
     loss_folder_path: str,
     feature_type_acc: str,
-    feature_type_loss: str):
+    feature_type_loss: str,
+    results_file_path: str):
     
-    print(accuracy_folder_path)
-    print(loss_folder_path)
     #image preprocessing
     class_names, x, y = imagePreprocessing.preprocess_imagesv2(
         dataset_path=initial_dataset_path, 
@@ -106,7 +105,8 @@ def test(initial_dataset_path: str,
         y_pred=net.infer(X_test), 
         framework="torch", 
         mode="feature_extractor", 
-        num_classes = num_classes)
+        num_classes = num_classes,
+        results_file_path = results_file_path)
     
     #feature extraction
     for class_name in class_names:
