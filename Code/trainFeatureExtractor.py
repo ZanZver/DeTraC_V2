@@ -106,7 +106,8 @@ def test(initial_dataset_path: str,
         framework="torch", 
         mode="feature_extractor", 
         num_classes = num_classes,
-        results_file_path = results_file_path)
+        results_file_path = results_file_path,
+        class_names = class_names)
     
     #feature extraction
     for class_name in class_names:
@@ -123,6 +124,7 @@ def test(initial_dataset_path: str,
             file=os.path.join(extracted_features_path, f"{class_name}.npy"), 
             arr=extracted_features
         )
+    
     
     #decomposition based on class names
     decomposition.execute_decomposition(initial_dataset_path,

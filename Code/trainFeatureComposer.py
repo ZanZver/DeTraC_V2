@@ -101,5 +101,6 @@ def test(
         framework="torch", 
         mode="feature_composer", 
         num_classes = num_classes // 2,
-        results_file_path = results_file_path
+        results_file_path = results_file_path,
+        class_names = class_names
     )

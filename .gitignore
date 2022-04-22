@@ -12,3 +12,8 @@ Data/extracted_features/PNEUMONIA.npy
 *.txt
 *.npy
 Data/extracted_features/PNEUMONIA.npy
+Code/rm-decomposeV2.py
+Code/decomposeV2.py
+Code/folderTest.py
+Data/extracted_features/PNEUMONIA.npy
+Code/decomposeV2.py

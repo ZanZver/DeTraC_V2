@@ -10,7 +10,7 @@ def multiclass_confusion_matrix(
     sp = np.zeros(num_classes)
     
     for i in range(num_classes):
-        TP, TN, FP, FN = 0, 0, 0, 0
+        TP, TN, FP, FN = 0, 0, 0, 0 #True Positives, True Negatives,  False Positives, False Negatives
 
         TP += cmat[i][i]
         
