@@ -1,4 +1,5 @@
 from inspect import Parameter
+import dataAugmentation
 import trainFeatureExtractor
 import trainFeatureComposer
 import modelPrediction
@@ -46,6 +47,7 @@ k = 3
 modelType = resnet18
 momentumValue = 0.99
 dropoutValue = 0.75
+dataAugmentationEnabled = False
 lrDecrese = 0.0
 
 parameters = str("""num_epochs = """+str(num_epochs)+"""
@@ -59,13 +61,15 @@ use_cuda = """+str(use_cuda)+"""
 k = """+str(k)+"""
 modelType = """+str(modelType)+"""
 momentumValue = """+str(momentumValue)+"""
-dropoutValue = """+str(dropoutValue))
+dropoutValue = """+str(dropoutValue)) + """
+dataAugmentationEnabled = """+str(dataAugmentationEnabled)
 print(parameters)
 
 #==========================================================
 # Data path:
 DATA_FOLDER_PATH = "Data"
 INITIAL_DATASET_PATH = os.path.join(DATA_FOLDER_PATH, "initial_dataset")
+AUGMENTED_DATASET_PATH = os.path.join(DATA_FOLDER_PATH, "augmented")
 EXTRACTED_FEATURES_PATH = os.path.join(DATA_FOLDER_PATH, "extracted_features")
 COMPOSED_DATASET_PATH = os.path.join(DATA_FOLDER_PATH, "composed_dataset")
 INITIAL_DATASET_PATH_V2 = os.path.join(DATA_FOLDER_PATH, "initial_dataset_v2")
@@ -129,6 +133,7 @@ def checkFolders(foldername):
 
 checkFolders(DATA_FOLDER_PATH)  
 checkFolders(INITIAL_DATASET_PATH)
+checkFolders(AUGMENTED_DATASET_PATH)
 checkFolders(EXTRACTED_FEATURES_PATH)
 checkFolders(COMPOSED_DATASET_PATH)
 checkFolders(INITIAL_DATASET_PATH_V2)
@@ -160,18 +165,28 @@ f.write(parameters)
 f.close
 
 #==========================================================
+#augmet data
+
+if(dataAugmentationEnabled):
+    print("Data augmentation enabled")
+    dataAugmentation.augmentImages(INITIAL_DATASET_PATH)
+    dataset_in_use = INITIAL_DATASET_PATH # INITIAL_DATASET_PATH or AUGMENTED_DATASET_PATH
+
+#==========================================================
 #Task 1 
 #train - feature extractor
 '''
     To do: if Exception has been thrown, stop the code
 '''
+##
 
+##
 print("==========================================================")
 print("Train - feature extractor")
 print("==========================================================")
 
 
-trainFeatureExtractor.test( initial_dataset_path=INITIAL_DATASET_PATH,
+trainFeatureExtractor.test( initial_dataset_path=dataset_in_use,
                             extracted_features_path=EXTRACTED_FEATURES_PATH,
                             epochs=num_epochs,
                             batch_size=batch_size,
@@ -191,8 +206,6 @@ trainFeatureExtractor.test( initial_dataset_path=INITIAL_DATASET_PATH,
                             feature_type_acc = FEATURE_EXTRACTOR_ACCURACY_FOLDER_PATH,
                             feature_type_loss = FEATURE_EXTRACTOR_LOSS_FOLDER_PATH,
                             results_file_path = FEATURE_EXTRACTOR_RESULTS_FOLDER_PATH)
-
-createNewInitaialDataset.execute_newInitaial_dataset(INITIAL_DATASET_PATH,INITIAL_DATASET_PATH_V2)
 
 #==========================================================
 #Task 2 - train model on subclasses 
@@ -228,6 +241,8 @@ if(featureComposerOld == True):
     print("==========================================================")
     print("Train - feature composer - initial dataset")
     print("==========================================================")
+    createNewInitaialDataset.execute_newInitaial_dataset(dataset_in_use,INITIAL_DATASET_PATH_V2)
+    
     trainFeatureComposer.test(  composed_dataset_path=INITIAL_DATASET_PATH_V2,
                                 epochs=num_epochs,
                                 batch_size=batch_size,
