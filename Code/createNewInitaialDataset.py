@@ -1,11 +1,3 @@
-'''
-import os
-import shutil
-import numpy as np
-from sklearn.cluster import KMeans
-from tqdm import tqdm
-import matplotlib.pyplot as plt
-'''
 import os
 import random
 import shutil

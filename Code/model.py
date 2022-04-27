@@ -533,6 +533,7 @@ class Net(object):
             progress_bar = tqdm(range(start_epoch, epochs))
             progress_bar.set_description("Resuming training...")
             for epoch in progress_bar:
+                print("This is: "+str(epoch))
                 train_loss, train_acc = self.train_step(train_loader)
                 val_loss, val_acc = self.validation_step(validation_loader)
 
@@ -555,11 +556,13 @@ class Net(object):
         else:
             progress_bar = tqdm(range(start_epoch, epochs))
             progress_bar.set_description("Starting training...")
+            
 
             for epoch in progress_bar:
                 train_loss, train_acc = self.train_step(train_loader)
                 val_loss, val_acc = self.validation_step(validation_loader)
-                
+                #print("This is: "+str(epoch))
+                #print("LR: " + str(self.lr))
                 # Regularization
                 self.scheduler.step(val_loss)
 
@@ -581,9 +584,9 @@ class Net(object):
                 progress_bar.set_description(
                     f"[Epoch {epoch + 1} stats]: train_loss = {train_loss:.2f} | train_acc = {train_acc:.2f}% | val_loss = {val_loss:.2f} | val_acc = {val_acc:.2f}%")
                 #every 5 epochs drop LR by self.lrDecrese
-                if((epoch % 5) == 0):
-                    self.lr = self.lr - self.lrDecrese
+                self.lr = self.lr - self.lrDecrese
                 
+            #print("LR: " + str(self.lr))
             timeNow = str(datetime.now())
             plt.figure()
             plt.plot(self.epoch_list, self.train_acc_list, 'bo', label='Training acc')
