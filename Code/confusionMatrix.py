@@ -1,3 +1,4 @@
+import warnings
 from unittest import result
 import numpy as np
 from sklearn.metrics import confusion_matrix
@@ -8,6 +9,8 @@ from sklearn.metrics import precision_recall_fscore_support as score
 import pandas as pd
 import seaborn
 import matplotlib.pyplot as plt
+
+warnings.filterwarnings('always')
 
 def test():
     print("confusion matrix")
@@ -51,20 +54,16 @@ def compute_confusion_matrix(
         normalize="all"
     )
     
-    cmat2 = pd.crosstab(
-        y_true.argmax(axis=1), 
-        y_pred.argmax(axis=1), 
-        normalize="all"
-    )
     #print(num_classes)
     #print(cmat2)
     # If the feature composer was selected, divide the confusion matrix by NxN kernels
+
     if mode == "feature_composer":
         try:
             cmat = compose_classes(cmat, (2, 2))
         except:
             print("error")
-       
+    
     #print(cmat)
     #plt.figure()
     #cmatPlot = seaborn.heatmap(cmat, annot=True)
@@ -97,37 +96,45 @@ def compute_confusion_matrix(
     ConfusionMatrixData= str(confusion)
     
     Accuracy = str('\nAccuracy: {:.2f}\n'.format(accuracy_score(y_true.argmax(axis=1), y_pred.argmax(axis=1))))
-
-    MicroPrecision = str('Micro Precision: {:.2f}\n'.format(precision_score(y_true.argmax(axis=1), y_pred.argmax(axis=1), average='micro')))
+    
+    MicroPrecision = str('\nMicro Precision: {:.2f}\n'.format(precision_score(y_true.argmax(axis=1), y_pred.argmax(axis=1), average='micro')))
     MicroRecall = str('Micro Recall: {:.2f}\n'.format(recall_score(y_true.argmax(axis=1), y_pred.argmax(axis=1), average='micro')))
     MicroF1score = str('Micro F1-score: {:.2f}\n'.format(f1_score(y_true.argmax(axis=1), y_pred.argmax(axis=1), average='micro')))
-
-    MacroPrecision = str('Macro Precision: {:.2f}\n'.format(precision_score(y_true.argmax(axis=1), y_pred.argmax(axis=1), average='macro')))
+    
+    
+    MacroPrecision = str('\nMacro Precision: {:.2f}\n'.format(precision_score(y_true.argmax(axis=1), y_pred.argmax(axis=1), average='macro',labels=np.unique(y_pred.argmax(axis=1)))))
     MacroRecall = str('Macro Recall: {:.2f}\n'.format(recall_score(y_true.argmax(axis=1), y_pred.argmax(axis=1), average='macro')))
     MacroF1score = str('Macro F1-score: {:.2f}\n'.format(f1_score(y_true.argmax(axis=1), y_pred.argmax(axis=1), average='macro')))
-
-    WeightedPrecision = str('Weighted Precision: {:.2f}\n'.format(precision_score(y_true.argmax(axis=1), y_pred.argmax(axis=1), average='weighted')))
+    
+    WeightedPrecision = str('\nWeighted Precision: {:.2f}\n'.format(precision_score(y_true.argmax(axis=1), y_pred.argmax(axis=1), average='weighted',labels=np.unique(y_pred.argmax(axis=1)))))
     WeightedRecall = str('Weighted Recall: {:.2f}\n'.format(recall_score(y_true.argmax(axis=1), y_pred.argmax(axis=1), average='weighted')))
     WeightedF1score = str('Weighted F1-score: {:.2f}\n'.format(f1_score(y_true.argmax(axis=1), y_pred.argmax(axis=1), average='weighted')))
 
     ClassificationReport = str('\nClassification Report\n')
+    #print(class_names)
+    #print(np.unique(y_pred.argmax(axis=1)))
     try:
         ClassificationReportData = str(classification_report(y_true.argmax(axis=1), y_pred.argmax(axis=1), target_names = class_names))
+    #ClassificationReportData = str(classification_report(y_true.argmax(axis=1), y_pred.argmax(axis=1), target_names = class_names, zero_division=0))
     except:
         ClassificationReportData = str(classification_report(y_true.argmax(axis=1), y_pred.argmax(axis=1)))
     
-    result2 = str( ConfusionMatrix +
+    result2 = str( ConfusionMatrix +             
 ConfusionMatrixData +
 Accuracy +
+"==============================================================================" +     
 MicroPrecision +
 MicroRecall +
 MicroF1score +
+"==============================================================================" +     
 MacroPrecision +
 MacroRecall +
 MacroF1score +
+"==============================================================================" +     
 WeightedPrecision +
 WeightedRecall +
 WeightedF1score + 
+"==============================================================================" + 
 ClassificationReport +
 ClassificationReportData
     )

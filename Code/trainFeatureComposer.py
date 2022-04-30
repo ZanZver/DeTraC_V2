@@ -22,7 +22,8 @@ def test(
     loss_folder_path: str,
     feature_type_acc: str,
     feature_type_loss: str,
-    results_file_path: str):
+    results_file_path: str,
+    mode: str):
     
     #image preprocessing
     class_names, x, y = imagePreprocessing.preprocess_imagesv2(
@@ -79,7 +80,7 @@ def test(
         dropoutValue=dropoutValue,
         lrDecrese=lrDecrese
     )
-     
+    
     net.fitv2(
         X_train,
         Y_train,
@@ -93,14 +94,15 @@ def test(
         feature_type_acc = feature_type_acc,
         feature_type_loss = feature_type_loss
     )
-    
+     
     #confusion matrix
     confusionMatrix.compute_confusion_matrix(
         y_true=Y_test, 
         y_pred=net.infer(X_test), 
         framework="torch", 
-        mode="feature_composer", 
+        mode=mode, 
         num_classes = num_classes // 2,
         results_file_path = results_file_path,
         class_names = class_names
     )
+    

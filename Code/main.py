@@ -105,14 +105,17 @@ RESULTS_FOLDER_PATH = os.path.join(MODEL_GRAPH_DATE_FOLDER, "ResultsConfusion")
 FEATURE_EXTRACTOR_ACCURACY_FOLDER_PATH = os.path.join(ACCURACY_FOLDER_PATH, "FeatureExtractor")
 FEATURE_COMPOSER_COMPOSEDPATH_ACCURACY_FOLDER_PATH = os.path.join(ACCURACY_FOLDER_PATH, "FeatureComposerComposedPath")
 FEATURE_COMPOSER_INITIALPATH_ACCURACY_FOLDER_PATH = os.path.join(ACCURACY_FOLDER_PATH, "FeatureComposerInitialPath")
+FEATURE_COMPOSER_AUTOMATIC_ACCURACY_FOLDER_PATH = os.path.join(ACCURACY_FOLDER_PATH, "FeatureComposerAutomaticPath")
 
 FEATURE_EXTRACTOR_LOSS_FOLDER_PATH = os.path.join(LOSS_FOLDER_PATH, "FeatureExtractor")
 FEATURE_COMPOSER_COMPOSEDPATH_LOSS_FOLDER_PATH = os.path.join(LOSS_FOLDER_PATH, "FeatureComposerComposedPath")
 FEATURE_COMPOSER_INITIALPATH_LOSS_FOLDER_PATH = os.path.join(LOSS_FOLDER_PATH, "FeatureComposerInitialPath")
+FEATURE_COMPOSER_AUTOMATIC_LOSS_FOLDER_PATH = os.path.join(LOSS_FOLDER_PATH, "FeatureComposerAutomaticPath")
 
 FEATURE_EXTRACTOR_RESULTS_FOLDER_PATH = os.path.join(RESULTS_FOLDER_PATH, "FeatureExtractor/")
 FEATURE_COMPOSER_COMPOSEDPATH_RESULTS_FOLDER_PATH = os.path.join(RESULTS_FOLDER_PATH, "Composed/")
 FEATURE_COMPOSER_INITIALPATH_RESULTS_FOLDER_PATH = os.path.join(RESULTS_FOLDER_PATH, "InitialResults/")
+FEATURE_COMPOSER_AUTOMATIC_RESULTS_FOLDER_PATH = os.path.join(RESULTS_FOLDER_PATH, "Automatic/")
 
 #==========================================================
 '''
@@ -150,15 +153,18 @@ checkFolders(LOSS_FOLDER_PATH)
 checkFolders(FEATURE_EXTRACTOR_ACCURACY_FOLDER_PATH)
 checkFolders(FEATURE_COMPOSER_COMPOSEDPATH_ACCURACY_FOLDER_PATH)
 checkFolders(FEATURE_COMPOSER_INITIALPATH_ACCURACY_FOLDER_PATH)
+checkFolders(FEATURE_COMPOSER_AUTOMATIC_ACCURACY_FOLDER_PATH)
 
 checkFolders(FEATURE_EXTRACTOR_LOSS_FOLDER_PATH)
 checkFolders(FEATURE_COMPOSER_COMPOSEDPATH_LOSS_FOLDER_PATH)
 checkFolders(FEATURE_COMPOSER_INITIALPATH_LOSS_FOLDER_PATH)
+checkFolders(FEATURE_COMPOSER_AUTOMATIC_LOSS_FOLDER_PATH)
 
 checkFolders(RESULTS_FOLDER_PATH)
 checkFolders(FEATURE_EXTRACTOR_RESULTS_FOLDER_PATH)
 checkFolders(FEATURE_COMPOSER_COMPOSEDPATH_RESULTS_FOLDER_PATH)
 checkFolders(FEATURE_COMPOSER_INITIALPATH_RESULTS_FOLDER_PATH)
+checkFolders(FEATURE_COMPOSER_AUTOMATIC_RESULTS_FOLDER_PATH)
 
 f = open(PARAMETERS_FILE_PATH, "w")
 f.write(parameters)
@@ -170,7 +176,9 @@ f.close
 if(dataAugmentationEnabled):
     print("Data augmentation enabled")
     dataAugmentation.augmentImages(INITIAL_DATASET_PATH)
-    dataset_in_use = INITIAL_DATASET_PATH # INITIAL_DATASET_PATH or AUGMENTED_DATASET_PATH
+    dataset_in_use = AUGMENTED_DATASET_PATH # INITIAL_DATASET_PATH or AUGMENTED_DATASET_PATH
+else:
+    dataset_in_use = INITIAL_DATASET_PATH
 
 #==========================================================
 #Task 1 
@@ -203,9 +211,10 @@ trainFeatureExtractor.test( initial_dataset_path=dataset_in_use,
                             modelType = modelType,
                             accuracy_folder_path = ACCURACY_FOLDER_PATH,
                             loss_folder_path = LOSS_FOLDER_PATH,
-                            feature_type_acc = FEATURE_EXTRACTOR_ACCURACY_FOLDER_PATH,
-                            feature_type_loss = FEATURE_EXTRACTOR_LOSS_FOLDER_PATH,
-                            results_file_path = FEATURE_EXTRACTOR_RESULTS_FOLDER_PATH)
+                            feature_type_acc = FEATURE_COMPOSER_AUTOMATIC_ACCURACY_FOLDER_PATH,
+                            feature_type_loss = FEATURE_COMPOSER_AUTOMATIC_LOSS_FOLDER_PATH,
+                            results_file_path = FEATURE_COMPOSER_AUTOMATIC_RESULTS_FOLDER_PATH,
+                            mode = "feature_extractor")
 
 #==========================================================
 #Task 2 - train model on subclasses 
@@ -214,9 +223,11 @@ trainFeatureExtractor.test( initial_dataset_path=dataset_in_use,
     To do: if Exception has been thrown, stop the code
 '''
 
-featureComposerOld = True
+#mode = "featureComposerOld"
+#mode = "featureComposerNew"
+mode = "automatic"
 
-if(featureComposerOld == True):
+if(mode == "featureComposerOld"):
     print("==========================================================")
     print("Train - feature composer - composed path")
     print("==========================================================")
@@ -236,8 +247,9 @@ if(featureComposerOld == True):
                                 loss_folder_path = LOSS_FOLDER_PATH,
                                 feature_type_acc = FEATURE_COMPOSER_COMPOSEDPATH_ACCURACY_FOLDER_PATH,
                                 feature_type_loss = FEATURE_COMPOSER_COMPOSEDPATH_LOSS_FOLDER_PATH,
-                                results_file_path = FEATURE_COMPOSER_COMPOSEDPATH_RESULTS_FOLDER_PATH)
-
+                                results_file_path = FEATURE_COMPOSER_COMPOSEDPATH_RESULTS_FOLDER_PATH,
+                                mode = "feature_composer")
+elif(mode == "featureComposerNew"):
     print("==========================================================")
     print("Train - feature composer - initial dataset")
     print("==========================================================")
@@ -259,7 +271,30 @@ if(featureComposerOld == True):
                                 loss_folder_path = LOSS_FOLDER_PATH,
                                 feature_type_acc = FEATURE_COMPOSER_INITIALPATH_ACCURACY_FOLDER_PATH,
                                 feature_type_loss = FEATURE_COMPOSER_INITIALPATH_LOSS_FOLDER_PATH,
-                                results_file_path = FEATURE_COMPOSER_INITIALPATH_RESULTS_FOLDER_PATH)
+                                results_file_path = FEATURE_COMPOSER_INITIALPATH_RESULTS_FOLDER_PATH,
+                                mode = "feature_composer")
+elif(mode == "automatic"):
+    print("==========================================================")
+    print("Train - feature composer - automatic mode")
+    print("==========================================================")
+    trainFeatureComposer.test(  composed_dataset_path=dataset_in_use,
+                                epochs=num_epochs,
+                                batch_size=batch_size,
+                                num_classes=feature_composer_num_classes,
+                                folds=folds,
+                                lr=feature_composer_lr,
+                                momentumValue=momentumValue,
+                                dropoutValue=dropoutValue,
+                                lrDecrese=lrDecrese,
+                                cuda=use_cuda,
+                                ckpt_dir=TORCH_CKPT_DIR,
+                                modelType = modelType,
+                                accuracy_folder_path = ACCURACY_FOLDER_PATH,
+                                loss_folder_path = LOSS_FOLDER_PATH,
+                                feature_type_acc = FEATURE_EXTRACTOR_ACCURACY_FOLDER_PATH,
+                                feature_type_loss = FEATURE_EXTRACTOR_LOSS_FOLDER_PATH,
+                                results_file_path = FEATURE_EXTRACTOR_RESULTS_FOLDER_PATH,
+                                mode = "feature_extractor")
 
 #==========================================================
 #Task 3 - predict
