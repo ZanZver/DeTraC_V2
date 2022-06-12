@@ -1,0 +1,27 @@
+\subsection{Dataset description}
+
+DeTraC is not limited to work with only one dataset. It can work with any image dataset provided to it. The only thing that needs to be checked is that the dataset has is already classified. So for example, if we are using cats and dogs dataset, there needs to be one folder with cats and one with dogs inside the "Data/inital-dataset" folder.
+
+\subsubsection{Dataset in use}
+So far, different datasets have been tested while code was under the stage of the development. Now in this report, we are going to mainly use "Collection of textures in colorectal cancer histology" dataset \parencite{kather_2016_53169}.
+\newline
+The origin of the images is from authors archive - Institute of Pathology, University Medical Center Mannheim, Heidelberg University, Mannheim, Germany and all of the experiments were approved by the institutional ethics board (approval 2015-868R-MA).
+
+\subsubsection{About dataset licence}
+Dataset is licensed under "Creative Commons Attribution 4.0 International Public License". The only element bounding us to the licence is us attribution. With that in mind, author is asking to be cited upon use of their work \parencite{web:licenseInfo}. 
+
+\subsubsection{About dataset}
+The dataset is representing a collection of textures of human colorectal cancer. It contains two files but we are only using "Kather{\_}texture{\_}2016{\_}image{\_}tiles{\_}5000.zip" file. This file contains 5000 images of the size 150px * 150px.
+\newline
+Upon decompressing the zip file, we are represented with 8 classes that we can use. Each class has 625 images inside in the tif format.
+Classes that are available are:
+\begin{itemize}
+  \item tumor,
+  \item stroma,
+  \item complex,
+  \item lympho,
+  \item debris,
+  \item mucosa,
+  \item adipose,
+  \item empty.
+\end{itemize}

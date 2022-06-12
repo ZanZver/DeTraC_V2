@@ -1,0 +1,101 @@
+\subsubsection{Test case 4}
+This test is about investing an effect of augmented data. In the Test case 3, we have had only 100 images which is not a lot. To combat the small dataset size, we can use data augmentation. So, in this dataset, we have used 100 images per class and augmented them. This gave us 730 images per class which in theory should result in the better accuracy.
+\newline
+Results that are represented in the graph for composed dataset bellow do show that more data indicates for validation accuracy to be displayed in analog style. The result is similar to Test case 2 while it differentiates from Test case 3. The only downside that this test case represents is lower accuracy. Compared to other test cases, this one if the lowest but still in the 70\% range of validation accuracy.
+\newline
+Due to increased sample size, we can see that in initial dataset, the plotted curve does look more analog. If we compare that to Test case 3, we can see that due to smaller data size the curve is much more digital. This gives us conformation that data augmentation has worked for this case.
+\begin{table}[!ht]
+  \centering
+    \begin{tabular}{ |m{15em}|m{17em}| } 
+     \hline
+        Variable names & Variable values \\ 
+     \hline
+        num{\_}epochs & 80 \\ 
+     \hline
+        batch{\_}size & 50 \\
+     \hline
+        feature{\_}extractor{\_}num{\_}classes & 3 \\
+     \hline
+        feature{\_}composer{\_}num{\_}classes & 6 \\
+     \hline
+        folds & 20 \\
+     \hline
+        feature{\_}extractor{\_}lr & 0.0001 \\
+     \hline
+        feature{\_}composer{\_}lr & 0.001 \\
+     \hline
+        use{\_}cuda & True \\
+     \hline
+        k & 2 \\
+     \hline
+        modelType & ResNet18 \\
+     \hline
+        momentumValue & 0.99 \\
+     \hline
+        dropoutValue & 0.0 \\
+     \hline
+    \end{tabular}
+\caption{Test case 4 variables}
+\end{table}
+
+%The graphs bellow are showing the plotted results:
+%\newline
+%(GRAPH A)
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.6]{img/graph-test4-composed.png}}
+    \caption{Test case 4 training and validation accuracy - composed dataset}
+\end{figure}
+%\newline
+%(GRAPH B)
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.6]{img/graph-test4-initial.png}}
+    \caption{Test case 4 training and validation accuracy - initial dataset}
+\end{figure}
+%\newline
+%From this information, we can conclude:
+
+\newpage
+After executing fourth test case, we can see results:
+%\newline
+\begin{table}[!ht]
+  \centering
+    \begin{tabular}{ |m{14em}|m{9em}|m{9em}| } 
+     \hline
+        Testing names & Composed results & Initial results \\ 
+     \hline
+        Accuracy & 0.23 & 0.18 \\
+     \hline
+        Micro Precision & 0.23 & 0.18 \\
+     \hline
+        Micro Recall & 0.23 & 0.18 \\
+     \hline
+        Micro F1 score & 0.23 & 0.18 \\
+     \hline
+        Macro Precision & 0.04 & 0.03 \\
+     \hline
+        Macro Recall & 0.17 & 0.17 \\
+     \hline
+        Macro F1 score & 0.06 & 0.05 \\
+     \hline
+        Weighted Precision & 0.05 & 0.03 \\
+     \hline
+        Weighted Recall & 0.23 & 0.18 \\
+     \hline
+        Weighted F1 score & 0.09 & 0.05 \\
+     \hline
+    \end{tabular}
+\caption{Test case 4 results}
+\end{table}
+
+%\newline
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.6]{img/res-test4-composed.png}}
+    \caption{Test case 4 confusion matrix results - composed dataset}
+\end{figure}
+%\newline
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.6]{img/res-test4-initial.png}}
+    \caption{Test case 4 confusion matrix results - initial dataset}
+\end{figure}
+
+%From this information, we can conclude:

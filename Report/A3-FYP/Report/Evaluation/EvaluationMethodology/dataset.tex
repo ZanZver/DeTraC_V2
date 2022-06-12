@@ -1,0 +1,20 @@
+\subsubsection{Dataset}
+We are using 3 classes from that dataset:
+\begin{itemize}
+  \item tumor,
+  \item stroma,
+  \item adipose.
+\end{itemize}
+
+As mentioned before, this project is not restricted by this dataset. In case of project reproduction, this can be used or tested with any other dataset (but parameters might need to be tuned slightly).
+\newline
+"Data" section is explaining how folders are structured and what is done to some extend. This section is going to add to this.
+Folder with the name of initial{\_}dataset is root of where the data is. In this folder, we place our initial data separated with classes. 
+\newline
+For the purpose of testing, we have used only 3 classes out of the 8 available in total. Each class has 625 images that we are dealing with. In case that the number of images is not enough for us, we have a function that deals with data augmentation. This function creates 801 new images that we can use. In the section of data augmentation, images are rotated, zoomed, flipped and brightness is changed. By creating new images model overfitting problems can be reduced \parencite{bloice2017augmentor}.
+\newline
+After we execute the program, it is going to go into feature extractor to extract features from images. It will adjust images if needed, split the data (with k-fold cross validation) and normalise it. Next step is to build NN and fit the data in. After that, the confusion matrix is executed, the model is build and feature extraction is done which results in a new folder with the name of extracted{\_}features. This folder contains features from each class as the numpy array. Based on the data in this folder, new folder is build with the name of composed{\_}dataset. New folders are created (as 1{\_}class1, 2{\_}class1, etc...) as program does k-means clustering. With that, folder is full of clustered images.
+\newline
+Next step is to decide if we want to use feature composer (so use DeTraC original code) or use initial dataset (the modified DeTraC version). Method that is build, does accept both versions, the only difference is parameters (example: composed data path or initial path). If we pass in the composed data path, it is going to use the clustered composed class that was created in the section above. After that, similar process is done on image processing (example: resize the image), k-fold cross validation, normalisation, building and testing the model.
+\newline
+Otherwise if we want to use initial dataset, we want to pass in the custom path. This folder has the same structure as composed dataset would, the only difference is that the images are split (based on the class) in sub-folders on random (as 1{\_}class1, 2{\_}class1, etc...). With that, we did not modify images, just split them presenting same structure as in composed folder while having same data as in initial folder. After the data is passed, same concept is used (for reproduction purposes) as if we would use feature composer path above (processing, k-fold, etc..).

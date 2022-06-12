@@ -1,0 +1,180 @@
+\paragraph{Data}
+The Data folder has 5 subfolders inside as seen in the tree structure bellow. At the start of the run, Python does a check if folder exists or not and it crates missing folders if needed. 
+\newline
+In the table bellow, we can see a short description of what each folder does.
+\newline
+
+%\break
+\begin{figure}[!ht]
+    \dirtree{%
+        .2 Data.
+        .3 augmented.
+        .3 composed{\_}dataset.
+        .3 extracted{\_}features.
+        .3 initial{\_}dataset.
+        .3 initial{\_}dataset{\_}v2.
+        }
+    \caption{Data folder structure}
+\end{figure}
+
+\begin{table}[!ht]
+  \centering
+    \begin{tabular}{ |m{13em}|m{19em}| } 
+     \hline
+        Program name & Program description \\ 
+     \hline
+        Augmented & For augmented (synthetic images) created if more images are needed \\
+     \hline
+        Composed dataset & Contains images that are being marked as composed \\
+     \hline
+        Extracted features & Python saves model features in this subfolder \\
+     \hline
+        Initial dataset & Source of original data that \\
+     \hline
+        Initial dataset v2 & Same dataset as initial dataset, but rearranged so it can be used for a prediction \\
+     \hline
+    \end{tabular}
+\caption{Data folders explained}
+\end{table}
+
+Augmented folder contains synthetic images. In the main.py, we can specify if we want to use augmented data or not. In case we don't initial dataset is going to act like main dataset. Otherwise if we want to use augmented data, new images are going to be created by changing features of existing images. This is done in subprogram dataAugmentation.py. The subprogram creates a subfolder under the Data folder with name augmented. This folder then hosts folders with the same name as in initial dataset but with data to be different. In each of the folders, images are constructed as label (folder name) + some set of random characters. In the figure bellow we can see how folder structure is represented for augmented images.
+\newpage
+\begin{figure}[!ht]
+    \dirtree{%
+    .3 augmented.
+    .4 Class{\_}A{\_}dataset.
+    .5 Class{\_}A{\_}dataset{\_}imgA1.png.
+    .5 Class{\_}A{\_}dataset{\_}imgA2.png.
+    .5 Class{\_}A{\_}dataset{\_}imgA3.png.
+    .5 Class{\_}A{\_}dataset{\_}imgA4.png.
+    .5 Class{\_}A{\_}dataset{\_}imgA5.png.
+    .5 Class{\_}A{\_}dataset{\_}imgA6.png.
+    .4 Class{\_}B{\_}dataset.
+    .5 Class{\_}B{\_}dataset{\_}imgB1.png.
+    .5 Class{\_}B{\_}dataset{\_}imgB2.png.
+    .5 Class{\_}B{\_}dataset{\_}imgB3.png.
+    .5 Class{\_}B{\_}dataset{\_}imgB4.png.
+    .5 Class{\_}B{\_}dataset{\_}imgB5.png.
+    .5 Class{\_}B{\_}dataset{\_}imgB6.png.
+    .4 Class{\_}C{\_}dataset.
+    .5 Class{\_}C{\_}dataset{\_}imgC1.png.
+    .5 Class{\_}C{\_}dataset{\_}imgC2.png.
+    .5 Class{\_}C{\_}dataset{\_}imgC3.png.
+    .5 Class{\_}C{\_}dataset{\_}imgC4.png.
+    .5 Class{\_}C{\_}dataset{\_}imgC5.png.
+    .5 Class{\_}C{\_}dataset{\_}imgC6.png.
+    }
+    \caption{Example of tree folder structure for augmented folder}
+\end{figure}
+
+
+Composed dataset is created at the start. When we execute the code, trainFeatureExtractor.py is called, which calls function execute{\_}composition (in decomposition.py). This function has 4 inputs (initial dataset path, composed dataset path, extracted features path and K). Based on those features, it generates data in composed dataset folder. 
+\newline
+When Python is creating Composed dataset, it checks first if folder exists, if not it creates it. In case that there is already a folder with data in place located, old data is removed. In the process of creation, 2 clusters are created for each class name. Once folders (clusters) are created, data is filled into the correct cluster. Tree diagram bellow is representing an example how clusters are structured. If we have classes A, B and C, class gets its own cluster 1 and 2 with data (from initial dataset) in both of them.
+\newpage
+\begin{figure}[!ht]
+    \dirtree{%
+    .3 composed{\_}dataset.
+    .4 Class{\_}A{\_}dataset{\_}1.
+    .5 imgA1.png.
+    .5 imgA2.png.
+    .5 imgA3.png.
+    .4 Class{\_}A{\_}dataset{\_}2.
+    .5 imgA4.png.
+    .5 imgA5.png.
+    .5 imgA6.png.
+    .4 Class{\_}B{\_}dataset{\_}1.
+    .5 imgB1.png.
+    .5 imgB2.png.
+    .5 imgB3.png.
+    .4 Class{\_}B{\_}dataset{\_}2.
+    .5 imgB4.png.
+    .5 imgB5.png.
+    .5 imgB6.png.
+    .4 Class{\_}C{\_}dataset{\_}1.
+    .5 imgC1.png.
+    .5 imgC2.png.
+    .5 imgC3.png.
+    .4 Class{\_}C{\_}dataset{\_}2.
+    .5 imgC4.png.
+    .5 imgC5.png.
+    .5 imgC6.png.
+    }
+    \caption{Example of tree folder structure for composed{\_}dataset folder}
+\end{figure}
+
+Features are extracted at the beginning as well, when trainFeatureExtractor.py is called. In there we call fuction extract{\_}features (from featureExtraction.py) which takes in 6 arguments (initial dataset path, class names, width, height, model and framework). Based on this, it reads grayscale image, converts img to RGB, resizes the image if necessary and saves image to the aray. This allows it to be saved locally. Process is repeated for each class. Example of how folder is structured can be seen in the tree structure bellow.
+%\break
+\begin{figure}[!ht]
+    \dirtree{%
+    .3 extracted{\_}features.
+    .4 Class{\_}A.npy.
+    .4 Class{\_}B.npy.
+    .4 Class{\_}C.npy.
+    }
+    \caption{Example of tree folder structure for extracted{\_}features folder}
+\end{figure}
+\newpage
+
+Initial (or source) dataset accepts different image formats (for example: JPG, PNG, TIF). DeTraC works with different kind of datasets, it was tested with multiple of them. In this report, we are using medical dataset (3.2 Dataset description). In order for code to work properly, initial folder needs to have at least two classes. Tree structure bellow is an example of how source folder is expected to be structured. 
+%\break
+\begin{figure}[!ht]
+    \dirtree{%
+    .3 initial{\_}dataset.
+    .4 Class{\_}A{\_}dataset.
+    .5 imgA1.png.
+    .5 imgA2.png.
+    .5 imgA3.png.
+    .5 imgA4.png.
+    .5 imgA5.png.
+    .5 imgA6.png.
+    .4 Class{\_}B{\_}dataset.
+    .5 imgB1.png.
+    .5 imgB2.png.
+    .5 imgB3.png.
+    .5 imgB4.png.
+    .5 imgB5.png.
+    .5 imgB6.png.
+    .4 Class{\_}C{\_}dataset.
+    .5 imgC1.png.
+    .5 imgC2.png.
+    .5 imgC3.png.
+    .5 imgC4.png.
+    .5 imgC5.png.
+    .5 imgC6.png.
+    }
+    \caption{Example of tree folder structure for initial{\_}dataset folder}
+\end{figure}
+\newpage
+
+Initial dataset v2 is a copy of source data. Images in this folder are the same as in initial dataset but it has the same structure as composed dataset. This is for code consistency reasons. With this structure, we can use original code and compare it to new one (using initial dataset) and be sure that there aren't any bias changes in place. The folder is created automatically at the start when function execute{\_}newInitaial{\_}dataset (from createNewInitaialDataset.py) is called. It creates clusters same as in composed dataset and it splits the data from initial data set to cluster 1 or 2 at random. Do note that it is even distribution between clusters. Example of how initial dataset v2 structure looks like is shown in the tree structure bellow.
+\begin{figure}[!ht]
+    \dirtree{%
+    .3 initial{\_}dataset{\_}v2.
+    .4 Class{\_}A{\_}dataset{\_}1.
+    .5 imgA1.png.
+    .5 imgA2.png.
+    .5 imgA3.png.
+    .4 Class{\_}A{\_}dataset{\_}2.
+    .5 imgA4.png.
+    .5 imgA5.png.
+    .5 imgA6.png.
+    .4 Class{\_}B{\_}dataset{\_}1.
+    .5 imgB1.png.
+    .5 imgB2.png.
+    .5 imgB3.png.
+    .4 Class{\_}B{\_}dataset{\_}2.
+    .5 imgB4.png.
+    .5 imgB5.png.
+    .5 imgB6.png.
+    .4 Class{\_}C{\_}dataset{\_}1.
+    .5 imgC1.png.
+    .5 imgC2.png.
+    .5 imgC3.png.
+    .4 Class{\_}C{\_}dataset{\_}2.
+    .5 imgC4.png.
+    .5 imgC5.png.
+    .5 imgC6.png.
+    }
+    \caption{Example of tree folder structure for initial{\_}dataset{\_}v2 folder}
+\end{figure}

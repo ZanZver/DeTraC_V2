@@ -1,0 +1,99 @@
+\subsubsection{Test case 2}
+Second test is showing results of much more intensive testing. The goal of this test is to get deeper information by testing the model a bit longer with heavier weights.
+\newline
+This test produced interesting results for comparison. First of all, if we have a look at training and validation accuracy graph of composed dataset, we can see that validation accuracy seems to be lower than expected but median of the plotted curve is a lot more centralised. If we compare that to initial dataset graph, we can see that validation accuracy is lower but plotted curve seem to have a bit more offset from its median in comparison to composed dataset.
+\begin{table}[!ht]
+  \centering
+    \begin{tabular}{ |m{15em}|m{17em}| } 
+     \hline
+        Variable names & Variable values \\ 
+     \hline
+        num{\_}epochs & 100 \\ 
+     \hline
+        batch{\_}size & 30 \\
+     \hline
+        feature{\_}extractor{\_}num{\_}classes & 3 \\
+     \hline
+        feature{\_}composer{\_}num{\_}classes & 6 \\
+     \hline
+        folds & 20 \\
+     \hline
+        feature{\_}extractor{\_}lr & 0.0001 \\
+     \hline
+        feature{\_}composer{\_}lr & 0.0001 \\
+     \hline
+        use{\_}cuda & True \\
+     \hline
+        k & 2 \\
+     \hline
+        modelType & ResNet18 \\
+     \hline
+        momentumValue & 0.99 \\
+     \hline
+        dropoutValue & 0.2 \\
+     \hline
+    \end{tabular}
+\caption{Test case 2 variables}
+\end{table}
+
+%The graphs bellow are showing the plotted results:
+%\newline
+%(GRAPH A)
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.6]{img/graph-test2-composed.png}}
+    \caption{Test case 2 training and validation accuracy - composed dataset}
+\end{figure}
+%\newline
+%(GRAPH B)
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.6]{img/graph-test2-initial.png}}
+    \caption{Test case 2 training and validation accuracy - initial dataset}
+\end{figure}
+%\newline
+%From this information, we can conclude:
+
+%\newpage
+After executing second test case, we can see results:
+%\newline
+\begin{table}[!ht]
+  \centering
+    \begin{tabular}{ |m{14em}|m{9em}|m{9em}| } 
+     \hline
+        Testing names & Composed results & Initial results \\ 
+     \hline
+        Accuracy & 0.08 & 0.16 \\
+     \hline
+        Micro Precision & 0.08 & 0.16 \\
+     \hline
+        Micro Recall & 0.08 & 0.16 \\
+     \hline
+        Micro F1 score & 0.08 & 0.16 \\
+     \hline
+        Macro Precision & 0.01 & 0.03 \\
+     \hline
+        Macro Recall & 0.17 & 0.17 \\
+     \hline
+        Macro F1 score & 0.02 & 0.05 \\
+     \hline
+        Weighted Precision & 0.01 & 0.03 \\
+     \hline
+        Weighted Recall & 0.08 & 0.16 \\
+     \hline
+        Weighted F1 score & 0.01 & 0.04 \\
+     \hline
+    \end{tabular}
+\caption{Test case 2 results}
+\end{table}
+
+%\newline
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.6]{img/res-test2-composed.png}}
+    \caption{Test case 2 confusion matrix results - composed dataset}
+\end{figure}
+%\newline
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.6]{img/res-test2-initial.png}}
+    \caption{Test case 2 confusion matrix results - initial dataset}
+\end{figure}
+
+%From this information, we can conclude:

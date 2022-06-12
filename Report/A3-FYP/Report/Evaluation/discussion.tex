@@ -1,0 +1,18 @@
+\subsection{Discussion}
+Comparing Test case 1 to Test case 2, we can see that there is a slight difference in the results. Overall, comparing composed dataset Test case 1 graph to composed dataset Test case 2 graph, they are almost identical. One big difference we can easily spot is that graph plotted for validation accuracy seems to be noisier in Test case 2. 
+\newline
+The biggest difference is in the initial dataset graphs. In the Test case 1, we can see line plotting in the 50\% range and up for validation accuracy. Comparing that to Test case 2, validation accuracy is noisier and seems to be decreasing. 
+Hyper parameters for Test case 1 and Test case 2 are similar, but there are three key differences that seem to drive the behaviour in this way. In Test case 1, we have bigger batch size of 50 (compared to batch size of 30) and dropout is disabled (while it is enabled in Test case 2). Learning rate for feature composer (and initial dataset) is also increased in Test case 1. Combination of these parameters seems to be inefficient for our model.
+\newline
+\newline
+If we directly compare results from Test case 2 and Test case 3, something interesting can be seen. Data in Test case 2 is 650 items per class while Test case 3 is only 100 items per class. Despite the data difference, the difference in validation accuracy between initial and composed class is similar. We are using different hyper parameters (weights) for each test, that is resulting for difference in validation accuracy over all. But regardless in comparison of the two tests, offset between composed and initial dataset is still similar.
+\newline
+\newline
+Initial dataset results seem to be similar. If we compare validation accuracy graph from Test case 4 to Test case 3, we can see that because of bigger data volume (730 compared to 100), the plotted results are not as digital. Plotted results of Test case 4 seem to be in the in the same way as in Test case 2 which is reasonable due to number of images being a lot closer. If we have a look at what validation accuracy presents compared across the three test cases, we can see that in Test case 4, it is in the range of 50\%. Test case 3 is in the similar range and Test case 2 is in the 40\% range. This can confirm our idea that the composed dataset is similar across the board. 
+\newline
+\newline
+Concluding the test cases, we can see that researchers over the original DeTraC model have made progress in the right sections. If this model would be performing better with the initial dataset compared to the composed, that would result in different questions. 
+\newline
+Overall, the results seem to behave in the similar way in general:
+\newline
+If validation accuracy is improved for composed dataset, it is going going to be improved for initial dataset as well. If validation accuracy decreases for composed dataset, initial dataset will have decrease as well. The difference of results from validation accuracy between composed dataset and initial dataset seems to be in similar range across all the test cases.

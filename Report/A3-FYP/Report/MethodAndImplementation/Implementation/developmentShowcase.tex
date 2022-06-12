@@ -1,0 +1,217 @@
+\subsubsection{Development execution}
+
+Main development folder is created under the name "DeTraC{\_}V2". The folder contains 4 sub-folders that are needed in order for code to work. 
+\newline
+The folders bellow are automatically generated if they could not be found. The exception is Code folder since it hosts actual code.
+\begin{itemize}
+  \item Code
+    \begin{itemize}
+        \item Has all the Python files.
+    \end{itemize}
+  \item Data
+    \begin{itemize}
+        \item Contains original data and rearranged data (based on original).
+    \end{itemize}
+  \item Graphs
+    \begin{itemize}
+        \item All of the results are saved here.
+    \end{itemize}
+  \item Models
+    \begin{itemize}
+        \item Past models are saved under this location.
+    \end{itemize}
+\end{itemize}
+
+Tree folder structure (Figure 2) is showcasing how each folder is structured. Do note that this is only representing roots folders in depth 1 and items in the folders. Each section bellow is going in more depth regarding items stored in them.
+\begin{figure}[!ht]
+\dirtree{%
+.1 DeTraC{\_}V2.
+% Code folder
+.2 Code.
+.3 confusionMatrix.py.
+.3 createNewInitaialDataset.py.
+.3 dataAugmentation.py.
+.3 decomposition.py.
+.3 featureExtraction.py.
+.3 imagePreprocessing.py.
+.3 kFold.py.
+.3 main.py.
+.3 model.py.
+.3 modelPrediction.py.
+.3 multiclassConfusionMatrix.py.
+.3 trainFeatureComposer.py.
+.3 trainFeatureExtractor.py.
+.3 requirements.txt.
+% Data folder
+.2 Data.
+.3 augmented.
+.3 composed{\_}dataset.
+.3 extracted{\_}features.
+.3 initial{\_}dataset.
+.3 initial{\_}dataset{\_}v2.
+% Graphs folder
+.2 Graphs.
+.3 Model{\_}Run{\_}YYYY-MM-DD{\_}HH/MM/SS.
+% Models folder
+.2 Models.
+.3 tf.
+.3 torch.
+% Logs folder
+%.2 Logs.
+}
+\caption{Example of tree folder structure of root folder}
+\end{figure}
+
+\newpage
+\input{Report/MethodAndImplementation/Implementation/DevelopmentShowcase/code}
+
+\newpage
+\input{Report/MethodAndImplementation/Implementation/DevelopmentShowcase/data}
+
+\newpage
+\input{Report/MethodAndImplementation/Implementation/DevelopmentShowcase/graphs}
+
+\newpage
+\input{Report/MethodAndImplementation/Implementation/DevelopmentShowcase/models}
+
+\begin{comment}
+%original tree structure with all the "nodes"
+\dirtree{%
+.1 DeTraC-V2.
+% Code folder
+.2 Code.
+.3 confusionMatrix.py.
+.3 createNewInitaialDataset.py.
+.3 decomposition.py.
+.3 featureExtraction.py.
+.3 imagePreprocessing.py.
+.3 kFold.py.
+.3 main.py.
+.3 model.py.
+.3 modelPrediction.py.
+.3 multiclassConfusionMatrix.py.
+.3 trainFeatureComposer.py.
+.3 trainFeatureExtractor.py.
+.3 requirements.txt.
+% Data folder
+.2 Data.
+.3 composed{\_}dataset.
+.4 Class{\_}A{\_}dataset{\_}1.
+.5 imgA1.png.
+.5 imgA2.png.
+.5 imgA3.png.
+.4 Class{\_}A{\_}dataset{\_}2.
+.5 imgA4.png.
+.5 imgA5.png.
+.5 imgA6.png.
+.4 Class{\_}B{\_}dataset{\_}1.
+.5 imgB1.png.
+.5 imgB2.png.
+.5 imgB3.png.
+.4 Class{\_}B{\_}dataset{\_}2.
+.5 imgB4.png.
+.5 imgB5.png.
+.5 imgB6.png.
+.4 Class{\_}C{\_}dataset{\_}1.
+.5 imgC1.png.
+.5 imgC2.png.
+.5 imgC3.png.
+.4 Class{\_}C{\_}dataset{\_}2.
+.5 imgC4.png.
+.5 imgC5.png.
+.5 imgC6.png.
+.4 Class{\_}A.
+.5 imgA1.npy.
+.5 imgA2.npy.
+.5 imgA3.npy.
+.5 imgA4.npy.
+.5 imgA5.npy.
+.5 imgA6.npy.
+.4 Class{\_}B.
+.5 imgB1.npy.
+.5 imgB2.npy.
+.5 imgB3.npy.
+.5 imgB4.npy.
+.5 imgB5.npy.
+.5 imgB6.npy.
+.4 Class{\_}C.
+.5 imgC1.npy.
+.5 imgC2.npy.
+.5 imgC3.npy.
+.5 imgC4.npy.
+.5 imgC5.npy.
+.5 imgC6.npy.
+.3 initial{\_}dataset.
+.4 Class{\_}A{\_}dataset.
+.5 imgA1.png.
+.5 imgA2.png.
+.5 imgA3.png.
+.5 imgA4.png.
+.5 imgA5.png.
+.5 imgA6.png.
+.4 Class{\_}B{\_}dataset.
+.5 imgB1.png.
+.5 imgB2.png.
+.5 imgB3.png.
+.5 imgB4.png.
+.5 imgB5.png.
+.5 imgB6.png.
+.4 Class{\_}C{\_}dataset.
+.5 imgC1.png.
+.5 imgC2.png.
+.5 imgC3.png.
+.5 imgC4.png.
+.5 imgC5.png.
+.5 imgC6.png.
+.3 initial{\_}dataset{\_}v2.
+.4 Class{\_}A{\_}dataset{\_}1.
+.5 imgA1.png.
+.5 imgA2.png.
+.5 imgA3.png.
+.4 Class{\_}A{\_}dataset{\_}2.
+.5 imgA4.png.
+.5 imgA5.png.
+.5 imgA6.png.
+.4 Class{\_}B{\_}dataset{\_}1.
+.5 imgB1.png.
+.5 imgB2.png.
+.5 imgB3.png.
+.4 Class{\_}B{\_}dataset{\_}2.
+.5 imgB4.png.
+.5 imgB5.png.
+.5 imgB6.png.
+.4 Class{\_}C{\_}dataset{\_}1.
+.5 imgC1.png.
+.5 imgC2.png.
+.5 imgC3.png.
+.4 Class{\_}C{\_}dataset{\_}2.
+.5 imgC4.png.
+.5 imgC5.png.
+.5 imgC6.png.
+% Graphs folder
+.2 Graphs.
+.3 Model{\_}Run{\_}YYYY-MM-DD{\_}HH/MM/SS.
+.4 AccuracyGraphs.
+.5 FeatureComposerComposedPath.
+.6 YYYY-MM-DD{\_}HH/MM/SS{\_}accuracy.png.
+.5 FeatureComposerInitialPath.
+.6 YYYY-MM-DD{\_}HH/MM/SS{\_}accuracy.png.
+.5 FeatureExtractor.
+.6 YYYY-MM-DD{\_}HH/MM/SS{\_}accuracy.png.
+.4 LossGraphs.
+.5 FeatureComposerComposedPath.
+.6 Run{\_}YYYY-MM-DD{\_}HH/MM/SS{\_}loss.png.
+.5 FeatureComposerInitialPath.
+.6 Run{\_}YYYY-MM-DD{\_}HH/MM/SS{\_}loss.png.
+.5 FeatureExtractor.
+.6 Run{\_}YYYY-MM-DD{\_}HH/MM/SS{\_}loss.png.
+% Models folder
+.2 Models.
+.3 tf.
+.4 DeTraC{\_}feature{\_}composer{\_}2021-12-22{\_}12-13-51.pth.
+.3 torch.
+.4 DeTraC{\_}feature{\_}composer{\_}2021-12-22{\_}12-13-51.pth.
+% Logs folder
+.2 Logs.
+}
+\end{comment}

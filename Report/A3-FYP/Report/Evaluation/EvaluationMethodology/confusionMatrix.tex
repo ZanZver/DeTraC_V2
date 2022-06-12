@@ -1,0 +1,18 @@
+\subsubsection{Confusion matrix}
+Confusion matrix is a technique for feature selection. It allows for mapping of different values from the dataset to the table for visualisation \parencite{web:PrecisionAndRecallInPython}. Confusion matrix is used (most often) in classification, attribute selection and k-nearest neighbors \parencite{visa2011confusion}
+\newline
+There are four elements confusion matrix represents:
+\begin{itemize}
+  \item True Positives (TP), 
+  \item True Negatives (TN),  
+  \item False Positives (FP), 
+  \item False Negatives (FN).
+\end{itemize}
+Confusion matrix can represent these three (main) calculations:
+\begin{itemize}
+  \item precision,
+  \item recall,
+  \item f1 score.
+\end{itemize}
+
+In this case, we are using module confusion matrix from SkLearn \parencite{web:ConfusionMatrix}. The data that is passed in the function of confusion matrix is y{\_}true (confirmed true cases) and y{\_}pred (predicted true cases). Function is then returning four elements (TP, TN, FP and FN).

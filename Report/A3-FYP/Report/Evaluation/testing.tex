@@ -1,0 +1,6 @@
+\subsection{Testing}
+For splitting the data, K-fold cross validation is used instead of regular train/test split. K-fold cross validation allows us to split data into the small sections (buckets) \parencite{web:IntroductionToCrossValidation}. Each section is then spit again into train/test and desired algorithm is tested per each bucket. After all the sections have been covered, an average of each section is given back to us. With this, data is the most optimised in terms of split between train/test \parencite{refaeilzadeh2009cross}.
+\newline
+To implement K-fold cross validation, SkLearn K-Fold library was used \parencite{web:ModelSelectionKFold}. Firstly we are passing features (as X), labels (as Y) and number of splits (as K) into our custom function. The function returns 4 parameters back (X{\_}train, X{\_}test, Y{\_}train, Y{\_}test).
+\newline
+In our custom function, data is being split into K sections (buckets) and shuffled as well. After that, we go into the for loop that does the split for train/test and saves the result into the parameters that are then passed back from the function. 

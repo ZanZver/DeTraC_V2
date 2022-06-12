@@ -1,0 +1,40 @@
+\paragraph{Graphs}
+In order to visualise results of model runs, graphs are saved locally. After each successful run, under the Graphs folder, subfolder with model run and time is created. Each model run has three subfolers generated as well: accuracy graphs, loss graphs and results confusion. Based on what is needed, we can navigate to accuracy graphs, loss graphs or results from confusion matrix. There is also a file with the name of "Parameters.txt", which is generated to provide information on parameters (or weights) that were used for this model run.
+\newline
+The subfolder (accuracy and loss) has three different subfolders inside as well for composed path, initial path and feature extractor. After successful run is complete all tree graphs do have graphs saved inside for comparison.
+\newline
+Results from confusion matrix are saved under the results confusion subfolder. This folder creates three different subfolders inside: Composed, FeatureExtractor and Initial. The goal is to save results (accuracy, F1, etc...) from confusion matrix into the correct run. So if we are looking at the graph that used composed dataset we can see results from confusion matrix that are saved in composed folder as Results.txt.
+\newline
+With this structure, we can see past model runs and compare results. This has came in handy in the past since it is organised in the simple way. As mentioned above, MLOPS concepts would improve workflow like this. Structure of the Graphs folder can be seen in the tree diagram bellow.
+\newpage
+\begin{figure}[!ht]
+\dirtree{%
+.1 DeTraC{\_}V2.
+% Graphs folder
+.2 Graphs.
+.3 Model{\_}Run{\_}YYYY-MM-DD{\_}HH/MM/SS.
+.4 AccuracyGraphs.
+.5 FeatureComposerComposedPath.
+.6 YYYY-MM-DD{\_}HH/MM/SS{\_}accuracy.png.
+.5 FeatureComposerInitialPath.
+.6 YYYY-MM-DD{\_}HH/MM/SS{\_}accuracy.png.
+.5 FeatureExtractor.
+.6 YYYY-MM-DD{\_}HH/MM/SS{\_}accuracy.png.
+.4 LossGraphs.
+.5 FeatureComposerComposedPath.
+.6 Run{\_}YYYY-MM-DD{\_}HH/MM/SS{\_}loss.png.
+.5 FeatureComposerInitialPath.
+.6 Run{\_}YYYY-MM-DD{\_}HH/MM/SS{\_}loss.png.
+.5 FeatureExtractor.
+.6 Run{\_}YYYY-MM-DD{\_}HH/MM/SS{\_}loss.png.
+.4 ResultsConfusion.
+.5 Composed.
+.6 Results.txt.
+.5 FeatureExtractor.
+.6 Results.txt.
+.5 InitialResults.
+.6 Results.txt.
+.4 Parameters.txt.
+}
+\caption{Example of tree folder structure of Graphs folder}
+\end{figure}

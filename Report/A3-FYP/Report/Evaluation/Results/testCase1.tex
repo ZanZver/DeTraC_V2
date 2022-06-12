@@ -1,0 +1,98 @@
+\subsubsection{Test case 1}
+This test case has the same parameters as original paper for comparison. The goal of the test is to establish a close reproduction point of the papers results and see what our results would be in comparison between composed dataset (original to the paper) and initial dataset. In this case, deep mode was used to train the model.
+\newline
+For the data, we have used 650 images for each class (mentioned on top), without any synthetic data. As seen in the first graph representing validation accuracy for composed dataset, the plot seems a lot more analog and close to the median. The second graph is representing validation accuracy but for initial dataset. Seen from the graph, it is plotted in the same style as composed dataset but with results lower than composed dataset.
+%\newpage
+\begin{table}[!ht]
+  \centering
+    \begin{tabular}{ |m{15em}|m{17em}| } 
+     \hline
+        Variable names & Variable values \\ 
+     \hline
+        num{\_}epochs & 80 \\ 
+     \hline
+        batch{\_}size & 50 \\
+     \hline
+        feature{\_}extractor{\_}num{\_}classes & 3 \\
+     \hline
+        feature{\_}composer{\_}num{\_}classes & 6 \\
+     \hline
+        folds & 10 \\
+     \hline
+        feature{\_}extractor{\_}lr & 0.0001 \\
+     \hline
+        feature{\_}composer{\_}lr & 0.001 \\
+     \hline
+        use{\_}cuda & True \\
+     \hline
+        k & 2 \\
+     \hline
+        modelType & ResNet18 \\
+     \hline
+        momentumValue & 0.9 \\
+     \hline
+        dropoutValue & 0.0 \\
+     \hline
+    \end{tabular}
+\caption{Test case 1 variables}
+\end{table}
+
+%The graphs bellow are showing the plotted results:
+%\newline
+%(GRAPH A)
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.6]{img/graph-test1-composed.png}}
+    \caption{Test case 1 training and validation accuracy - composed dataset}
+\end{figure}
+%\newline
+%(GRAPH B)
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.6]{img/graph-test1-initial.png}}
+    \caption{Test case 1 training and validation accuracy - initial dataset}
+\end{figure}
+%\newline
+%From this information, we can conclude:
+
+%\newpage
+After executing first test case, we can see results:
+%\newline
+\begin{table}[!ht]
+  \centering
+    \begin{tabular}{ |m{14em}|m{9em}|m{9em}| } 
+     \hline
+        Testing names & Composed results & Initial results \\ 
+     \hline
+        Accuracy & 0.16 & 0.24 \\
+     \hline
+        Micro Precision & 0.16 & 0.24 \\
+     \hline
+        Micro Recall & 0.16 & 0.24 \\
+     \hline
+        Micro F1 score & 0.16 & 0.24 \\
+     \hline
+        Macro Precision & 0.03 & 0.07 \\
+     \hline
+        Macro Recall & 0.17 & 0.19 \\
+     \hline
+        Macro F1 score & 0.04 & 0.10 \\
+     \hline
+        Weighted Precision & 0.02 & 0.09 \\
+     \hline
+        Weighted Recall & 0.16 & 0.24 \\
+     \hline
+        Weighted F1 score & 0.04 & 0.13 \\
+     \hline
+    \end{tabular}
+\caption{Test case 1 results}
+\end{table}
+
+%\newline
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.6]{img/res-test1-composed.png}}
+    \caption{Test case 1 confusion matrix results - composed dataset}
+\end{figure}
+%\newline
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.6]{img/res-test1-initial.png}}
+    \caption{Test case 1 confusion matrix results - initial dataset}
+\end{figure}

@@ -1,0 +1,65 @@
+\paragraph{Code}
+
+This folder is home to all of the Python files. Main Python file (main.py) is responsible for executing the correct subprograms when needed. This modular approach is  better for the long run if we want to change any functionality. Another bonus of this approach is readily. It is simple to read the code that is organised across multiple files in compare to having one big file.
+\newline
+In the table bellow, all of the programs that are used are listed and their functionality is explained. There is also a tree structure provided for visualisation of the "Code" folder.
+\newline
+Note: requirements.txt file contains versions of libraries used in the program.
+\begin{table}[!ht]
+  \centering
+    \begin{tabular}{ |m{13em}|m{19em}| } 
+     \hline
+        Program name & Program description \\ 
+     \hline
+        confusionMatrix.py & Creates new confusion matrix \\
+     \hline
+        createNewInitaialDataset.py & Creates new folder initial{\_}dataset{\_}v2 and fills it with original data \\
+     \hline
+        dataAugmentation.py & If needed, data can be augmented by adding new "synthetic" images \\
+     \hline
+        decomposition.py & Decomposes the images into the correct folder \\
+     \hline
+        featureExtraction.py & Extracts features and save them locally \\
+     \hline
+        imagePreprocessing.py & Preprocesses images to fit the size and correct colour \\
+     \hline
+        kFold.py & Does k fold cross validation \\
+     \hline
+        main.py & Body of the code is here \\
+     \hline
+        model.py & Model is build in this section \\
+     \hline
+        modelPrediction.py & Predictions are executed here \\
+     \hline
+        multiclassConfusionMatrix.py & Helper class for confusion matrix \\
+     \hline
+        trainFeatureComposer.py & Main body for feature composer - everything is build here \\
+     \hline
+        trainFeatureExtractor.py & Main body for feature extractor - everything is build here \\
+     \hline
+    \end{tabular}
+\caption{Programs described}
+\end{table}
+
+\begin{figure}[!ht]
+\dirtree{%
+.1 DeTraC{\_}V2.
+% Code folder
+.2 Code.
+.3 confusionMatrix.py.
+.3 createNewInitaialDataset.py.
+.3 dataAugmentation.py.
+.3 decomposition.py.
+.3 featureExtraction.py.
+.3 imagePreprocessing.py.
+.3 kFold.py.
+.3 main.py.
+.3 model.py.
+.3 modelPrediction.py.
+.3 multiclassConfusionMatrix.py.
+.3 trainFeatureComposer.py.
+.3 trainFeatureExtractor.py.
+.3 requirements.txt.
+}
+\caption{Example of tree folder structure of Code folder}
+\end{figure}

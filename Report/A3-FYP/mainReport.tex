@@ -1,0 +1,188 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+%referencing >>>>>>>>
+\usepackage{amsmath}
+\usepackage[english]{babel}
+\usepackage[style=authoryear-ibid,backend=biber]{biblatex}
+\addbibresource{bibliography.bib}% Syntax for version >= 1.2
+%for minted>>>>>
+\usepackage{minted}
+\usemintedstyle{colorful}
+%others >>>>>>>>
+\usepackage{dirtree} 
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[center]{caption}
+\usepackage[normalem]{ulem}
+\usepackage{longtable}
+\usepackage{comment}
+\usepackage{array}
+\usepackage{soul}
+\usepackage{fancyhdr}
+\usepackage{adjustbox}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{zed-csp}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{csquotes}% Recommended
+\usepackage{comment}
+
+\usetikzlibrary{positioning}
+%for links >>>>>>
+\usepackage{hyperref}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,     
+    urlcolor=blue,
+    citecolor = black
+}
+\urlstyle{same}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+            {-2.5ex\@plus -1ex \@minus -.25ex}%
+            {1.25ex \@plus .25ex}%
+            {\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{4} 
+	
+\graphicspath{ {img/} }
+
+\title{Report title}
+\author{Zan Zver}
+\date{Report Date }
+
+\newcommand{\latex}{\LaTeX\ }
+\newcommand{\authorName}{Zan Zver}
+\newcommand{\authorID}{18133498}
+\newcommand{\reportTitle}{DeTraC modification with initial dataset}
+\newcommand{\degreeAward}{BSc (Hons) in Computer and Data Science } 
+
+\begin{document}
+\DeclareGraphicsExtensions{.jpg,.png,.gif,.pdf,.jpeg}
+\begin{titlepage}
+   \begin{center}
+       CMP/DIG6200 - A3 Submission of Final Dissertation
+       \vspace*{0.5cm}
+
+       \huge\textbf{\reportTitle} 
+
+       %\vspace{0.5cm}
+        %Dissertation of final year project 
+            
+       \vspace{1.5cm}
+
+       \authorName \ \authorID \\
+       \vspace{0.3cm}
+       \large{Computer and Data Science - BSC (HONS)}
+
+
+       %\vfill
+            
+       \vspace{0.3cm}
+            
+       \large{Faculty of Computing, Engineering and the Built Environment \\
+       Birmingham City University \\}
+       
+       \begin{figure}[htp]
+        \centering
+        \includegraphics{logo}
+        \end{figure}
+        
+       \vspace{0.3cm}
+       \large{Project supervisor: Dr. Mohammed Abdelsamea\\}
+       \large{Submitted on the April of 2022}
+            
+   \end{center}
+\end{titlepage}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\includegraphics[width = 3.3cm]{header.jpg}}
+\lhead{\footnotesize BIRMINGHAM CITY UNIVERSITY \\ SCHOOL OF COMPUTING AND DIGITAL TECHNOLOGY}
+\rfoot{Page \thepage}
+\newgeometry{top=110pt}
+\setlength{\headsep}{50pt}
+
+%===================================================================================================
+%
+%===================================================================================================
+\addcontentsline{toc}{section}{Abstract}
+\include{Report/abstract}
+%===================================================================================================
+%
+%===================================================================================================
+\addcontentsline{toc}{section}{Acknowledgements}
+\include{Report/acknowledgements}
+
+%===================================================================================================
+%
+%===================================================================================================
+\tableofcontents
+\newpage
+
+%===================================================================================================
+%
+%===================================================================================================
+\listoffigures
+\listoftables
+\newpage
+%===================================================================================================
+%
+%===================================================================================================
+\addcontentsline{toc}{section}{Glossary}
+\include{Report/glossary}
+
+%===================================================================================================
+%
+%===================================================================================================
+\include{Report/introduction}
+
+%===================================================================================================
+%
+%===================================================================================================
+\include{Report/literatureReview}
+
+%===================================================================================================
+%
+%===================================================================================================
+\include{Report/methodAndImplementation}
+
+%===================================================================================================
+%
+%===================================================================================================
+\include{Report/evaluation}
+
+%===================================================================================================
+%
+%===================================================================================================
+\include{Report/conclusions}
+
+%===================================================================================================
+%
+%===================================================================================================
+\include{Report/recommendationsForFutureWork}
+
+%===================================================================================================
+%
+%===================================================================================================
+\section{References} %7
+\printbibliography
+\newpage
+
+%===================================================================================================
+%
+%===================================================================================================
+%\section{Bibliography} %8
+%\newpage
+
+%===================================================================================================
+%
+%===================================================================================================
+%\section{Appendices} %9
+\include{Report/appendices}
+
+\end{document}

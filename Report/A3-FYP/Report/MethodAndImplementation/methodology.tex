@@ -1,0 +1,36 @@
+\subsection{Methodology}
+Methodology type that makes the most sense for this project is agile. The reason for agile is its continuing circle of development and testing. In comparison to waterfall methodology, agile allows to do continues development in corelation of research.
+
+\begin{figure}[!ht]
+\begin{tikzpicture}[
+roundnode/.style={circle, draw=green!60, fill=green!5, very thick, minimum size=7mm},
+roundnode2/.style={circle, draw=blue!60, fill=blue!5, very thick, minimum size=7mm}
+]
+%Nodes
+\node[roundnode2] (agile) {Agile Methodology};
+\node[roundnode] (uppercircle) [above=of agile] {1};
+\node[roundnode] (acceptChanges) [right=of agile] {Accept changes};
+\node[roundnode] (deploy) [right=of acceptChanges] {Deploy};
+\node[roundnode] (improveVersion) [below=of acceptChanges] {Improve version};
+\node[roundnode] (development) [left=of improveVersion] {Development};
+\node[roundnode] (testing) [left =of agile] {Testing};
+\node[roundnode] (release) [above=of agile] {Release};
+
+%Lines
+\draw[->] (release.east) .. controls +(right:7mm) and +(up:7mm) .. (acceptChanges.north);
+\draw[->] (acceptChanges.south) .. controls +(down:7mm) and +(up:7mm) .. (improveVersion.north) node[pos=0.50,right]{No};
+\draw[->] (acceptChanges.east) .. controls +(right:7mm) and +(left:7mm) .. (deploy.west) node[pos=0.45,above]{Yes};
+\draw[->] (improveVersion.west) .. controls +(left:7mm) and +(right:7mm) .. (development.east);
+\draw[->] (development.west) .. controls +(left:7mm) and +(down:7mm) .. (testing.south);
+\draw[->] (testing.north) .. controls +(up:7mm) and +(left:7mm) .. (release.west);
+
+\end{tikzpicture}
+\caption{Representation of agile approach}
+\end{figure}
+
+To manage time, Gantt chart was used. If this would be a group project, an online solution that can be shared across the team and track the progress would be better fit (example: Trello, Monday.com).
+
+\begin{figure}[H]
+    \centerline{\includegraphics[scale=0.35]{img/GanttChart.png}}
+    \caption{Gantt chart figure}
+\end{figure}

@@ -1,0 +1,14 @@
+\subsubsection{Precision}
+Precision is a ratio between items that are classified as True Positives divided from True Positives added with False Positives. The equation bellow \parencite{davis2006relationship} explains in mathematical terms how calculation can is done.
+\[\frac{True Positives }{True Positives + False Positives} = Precision \]
+
+For calculating precision SkLearn module (precision{\_}score) was used \parencite{web:PrecisionScore} at first. Based on the y{\_}true and y{\_}pred, this module does calculation and returns precision. There are also different parameters for average can be passed into the function, based on the need:
+\begin{itemize}
+    \item binary - for binary predictions
+    \item micro - metrics of True Positives (TP), False Negatives (FN) and False Positives (FP) are calculated
+    \item macro - metrics for each label are calculated and their unweighted mean is found. Do note that if there is imbalance (like in the real world) in labels, this is not taken in the consideration.
+    \item weighted - metrics for each label are calculated and their average weight is found. This is done by looking the number of true instances for each label. Using this approach can cause F1 score not to be between precision and recall.
+    \item samples - metrics is calculated for each instance and their average is found (this is used in multilabel classification).
+\end{itemize}
+
+Later on, another module was discovered from SkLearn with the name of precision{\_}recall{\_}fscore{\_}support \parencite{web:PrecisionRecallFscoreSupport}. As the name suggests, this module calculates all three items we need in one go, with the same parameters above. Due to its simplicity, precision, recall and f1 are being calculated with this new module. Regardless, the sections about precision and recall do explain how we could calculate it individually.

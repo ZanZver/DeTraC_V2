@@ -1,0 +1,80 @@
+\subsubsection{Evaluation Metrics}
+\begin{itemize}
+    \item Number of epochs (num{\_}epochs)
+    \begin{itemize}
+        \item Specify number of epochs (iterations). 
+        \item Expected type: positive integer (example: 20)
+    \end{itemize}
+    
+    \item Batch size (batch{\_}size)
+    \begin{itemize}
+        \item How many items are taken into the group (batch) at once.
+        \item Expected type: positive integer (example: 32)
+    \end{itemize}
+    
+    \item Number of classes for feature extractor (feature{\_}extractor{\_}num{\_}classes)
+    \begin{itemize}
+        \item Number of classes we have in our folder.
+        \item Expected type: positive integer (example: 3)
+    \end{itemize}
+    
+    \item Number of classes for feature composer (feature{\_}composer{\_}num{\_}classes)
+    \begin{itemize}
+        \item This is the same number as in feature extractor but doubled. Do note that if we are using initial dataset as input, parameter with this name will be used since it is only the name.
+        \item Expected type: positive integer (example: 6)
+    \end{itemize}
+    
+    \item How many folds we want (folds)
+    \begin{itemize}
+        \item For K-fold cross validation we need to specify the number of folds (K) that we would like.
+        \item Expected type: positive integer (example: 10)
+    \end{itemize}
+    
+    \item Learning rate for feature extractor (feature{\_}extractor{\_}lr)
+    \begin{itemize}
+        \item What is the learning rate for feature extractor.
+        \item Expected type: positive decimal (example: 0.001)
+    \end{itemize}
+    
+    \item Learning rate for feature composer(feature{\_}composer{\_}lr)
+    \begin{itemize}
+        \item What is the learning rate for feature composer.
+        \item Expected type: positive decimal (example: 0.001)
+    \end{itemize}
+    
+    \item If we want to use Cuda (use{\_}cuda)
+    \begin{itemize}
+        \item If we are using Nvidia Cuda capable GPU for faster processing, enabling that would allow for faster processing
+        \item Expected type: boolean (example: True)
+    \end{itemize}
+    
+    \item Number for K (k)
+    \begin{itemize}
+        \item Number for clusters in k-means clustering
+        \item Expected type: positive integer (example: 2)
+    \end{itemize}
+    
+    \item What type deep neural network model we want to use (modelType)
+    \begin{itemize}
+        \item We can chose from different models of DNN that are being implemented (for example: VGG16, ResNet18, etc...)
+        \item Expected type: string that contains model name listed (example: ResNet18)
+    \end{itemize}
+    
+    \item What the momentum should be for the model (momentumValue)
+    \begin{itemize}
+        \item The momentum model should have while it is operating
+        \item Expected type: positive decimal in the range between 0 and \(0.9^{\infty}\) (example: 0.60)
+    \end{itemize}
+    
+    \item What is the dropout value for the model (dropoutValue)
+    \begin{itemize}
+        \item For improved performance, we can specify for DNN model to kill some connections with dropout. This can be specified here.
+        \item Expected type: decimal in the range between 0 and \(0.9^{\infty}\) (example: 0.60)
+    \end{itemize}
+    
+    \item Is data augmentation enabled (dataAugmentationEnabled)
+    \begin{itemize}
+        \item If there is lack of data, we can generate new synthetic data by turning data augmentation on. This should improve model performance if there is any overfitting.
+        \item Expected type: boolean (example: True)
+    \end{itemize}
+\end{itemize}

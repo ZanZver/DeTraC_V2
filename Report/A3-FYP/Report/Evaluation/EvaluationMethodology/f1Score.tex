@@ -1,0 +1,5 @@
+\subsubsection{F1 score}
+F1 score is a combination of precision and recall. It is calculated by multiplying by 2 ratio between precision multiplied by recall and sum of precision and recall. Equation for the math can be seen bellow \parencite{lipton2014optimal}. Where F1 score is better is in imbalanced data. Due to the nature of raw real life data, F1 score attempts to "balanced out" differences in precision and recall to get a better representation.
+\[2 * \frac{precision * recall}{precision + recall} = F1 \]
+
+Calculating F1 can be done with another SkLearn module with the name of f1{\_}score \parencite{web:F1Score}. In this case, we pass in the parameters of y{\_}true and y{\_}pred to the module. Parameters of average can be set the same way as in precision. The result that is returned from the module is F1 score.
