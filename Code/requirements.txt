@@ -1,7 +1,7 @@
 tqdm==4.60.0
 torchvision==0.9.1
 tensorflow==2.4.1
-numpy==1.19.5
+numpy==1.22.0
 matplotlib==3.4.1
 loguru==0.5.3
 
